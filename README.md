@@ -8,3 +8,5 @@ This system consumes the goals and questions of the programmers and automaticall
 * Swagger
 * PostgreSQL
 * NLP
+
+## Structure
