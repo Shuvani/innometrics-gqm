@@ -46,7 +46,6 @@ public class GoalRestControllerTest {
         testRestTemplate.getRestTemplate().getInterceptors().clear();
     }
 
-
     //getGoal tests
     @Test
     public void getGoal_whenGoalIsNotInDB_receiveNotFound() {
