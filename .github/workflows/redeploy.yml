@@ -48,7 +48,7 @@ jobs:
       - name: Deploy docker container
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: bash 
+          command: bash /home/agorb/redeploy.sh
           host: ${{ secrets.HOST_IP }}
           port: ${{ secrets.HOST_PORT }}
           username: agorb
