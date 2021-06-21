@@ -1,6 +1,8 @@
 # GQM based metrics recommender module - backend
 This system consumes the goals and questions of the programmers and automatically suggests focused set of metrics.
 
+API documentation - http://188.130.155.202:28080/swagger-ui.html
+
 ## Technologies:
 * Maven
 * Spring
