@@ -2,6 +2,7 @@ package com.innometrics.gqm_api.service;
 
 import com.innometrics.gqm_api.dto.GoalBaseDto;
 import com.innometrics.gqm_api.dto.GoalRetrieveResponse;
+import com.innometrics.gqm_api.dto.GoalWithIdDto;
 import com.innometrics.gqm_api.dto.QuestionsForGoalDto;
 import com.innometrics.gqm_api.exception.ForbiddenException;
 import com.innometrics.gqm_api.exception.NotFoundException;
@@ -34,6 +35,11 @@ public class GoalService {
     }
 
     @Transactional
+    public List<GoalRetrieveResponse> getDtosByUser(String email) {
+      return getAllByUserEmail(email).stream().map(GoalRetrieveResponse::buildFrom).collect(Collectors.toList());
+    }
+
+    @Transactional
     public Goal getGoalById(Long goalId, RuntimeException exception) {
         return goalRepository.findById(goalId).orElseThrow(
                 () -> exception
@@ -46,6 +52,10 @@ public class GoalService {
                 .collect(Collectors.toList());
     }
 
+  public List<Goal> getAllByUserEmail(String email) {
+    return goalRepository.findByUserEmail(email);
+  }
+
     public List<Goal> getAllGoals() {
         return goalRepository.findAll();
     }
@@ -57,9 +67,9 @@ public class GoalService {
         );
     }
 
-    public GoalBaseDto createDtoFrom(GoalBaseDto goal) {
+    public GoalWithIdDto createDtoFrom(GoalBaseDto goal) {
         val resultGoal = Goal.buildFrom(goal);
-        return GoalBaseDto.buildFrom(save(resultGoal));
+        return GoalWithIdDto.buildFrom(save(resultGoal));
     }
 
     @Transactional

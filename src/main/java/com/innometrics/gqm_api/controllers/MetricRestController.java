@@ -17,6 +17,7 @@ public class MetricRestController {
 
     private final MetricService metricService;
 
+    @CrossOrigin
     @GetMapping("/{id}")
     @ApiOperation(value = "Finds metric by id",
             notes = "API endpoint that returns the metric with this primary key",
@@ -25,6 +26,7 @@ public class MetricRestController {
         return metricService.getDtoById(metricId);
     }
 
+    @CrossOrigin
     @GetMapping
     @ApiOperation(
             value = "Returns all metrics",
@@ -34,6 +36,7 @@ public class MetricRestController {
         return metricService.getAllDtos();
     }
 
+    @CrossOrigin
     @PostMapping
     @ApiOperation(
             value = "Creates new metric",
@@ -43,6 +46,7 @@ public class MetricRestController {
         return metricService.createDtoFrom(metric);
     }
 
+    @CrossOrigin
     @PutMapping("/{id}")
     @ApiOperation(
             value = "Updates the metric",
@@ -55,6 +59,7 @@ public class MetricRestController {
         return metricService.updateBy(metricId, metricBaseDto);
     }
 
+    @CrossOrigin
     @DeleteMapping("/{id}")
     @ApiOperation(
             value = "Deletes the metric",

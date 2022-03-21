@@ -58,11 +58,11 @@ public class QuestionService {
     }
 
     @Transactional
-    public QuestionCreateUpdateRequest createDtoFrom(QuestionCreateUpdateRequest questionCreateUpdateRequest) {
+    public QuestionWithIdDto createDtoFrom(QuestionCreateUpdateRequest questionCreateUpdateRequest) {
         val resultQuestion = Question.buildFrom(questionCreateUpdateRequest);
         goalRepository.findById(questionCreateUpdateRequest.getGoalId())
                       .ifPresent(resultQuestion::setGoal);
-        return QuestionCreateUpdateRequest.buildFrom(save(resultQuestion));
+        return QuestionWithIdDto.buildFrom(save(resultQuestion));
     }
 
     public QuestionCreateUpdateRequest updateBy(

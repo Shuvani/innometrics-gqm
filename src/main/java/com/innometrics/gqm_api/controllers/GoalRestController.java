@@ -2,6 +2,7 @@ package com.innometrics.gqm_api.controllers;
 
 import com.innometrics.gqm_api.dto.GoalBaseDto;
 import com.innometrics.gqm_api.dto.GoalRetrieveResponse;
+import com.innometrics.gqm_api.dto.GoalWithIdDto;
 import com.innometrics.gqm_api.dto.QuestionsForGoalDto;
 import com.innometrics.gqm_api.service.GoalService;
 import io.swagger.annotations.ApiOperation;
@@ -21,6 +22,7 @@ public class GoalRestController {
     //    get:
     //    API endpoint that returns a list of goals assigned to the current user.
 
+    @CrossOrigin
     @GetMapping("/{id}")
     @ApiOperation(
             value = "Finds goal by id",
@@ -30,6 +32,17 @@ public class GoalRestController {
         return goalService.getDtoById(goalId);
     }
 
+    @CrossOrigin
+    @GetMapping("/byEmail/{email}")
+    @ApiOperation(
+      value = "Returns goals of that user",
+      notes = "API endpoint that returns a list of goals for that user"
+    )
+    public List<GoalRetrieveResponse> getUserGoals(@PathVariable("email") String email) {
+      return goalService.getDtosByUser(email);
+    }
+
+    @CrossOrigin
     @GetMapping
     @ApiOperation(
             value = "Returns all goals",
@@ -39,6 +52,7 @@ public class GoalRestController {
         return goalService.getAllDtos();
     }
 
+    @CrossOrigin
     @GetMapping("/{id}/questions")
     @ApiOperation(
             value = "Returns a list of questions assigned to the goal",
@@ -48,15 +62,17 @@ public class GoalRestController {
         return goalService.getQuestionsByGoalId(goalId);
     }
 
+    @CrossOrigin
     @PostMapping
     @ApiOperation(
             value = "Create new goal",
             notes = "API endpoint to create a new goal"
     )
-    public GoalBaseDto createGoal(@Valid @RequestBody GoalBaseDto goal){
+    public GoalWithIdDto createGoal(@Valid @RequestBody GoalBaseDto goal){
         return goalService.createDtoFrom(goal);
     }
 
+    @CrossOrigin
     @PutMapping("/{id}")
     @ApiOperation(
             value = "Updates the goal",
@@ -69,6 +85,7 @@ public class GoalRestController {
         return goalService.updateBy(goalId, goalBaseDto);
     }
 
+    @CrossOrigin
     @DeleteMapping("/{id}")
     @ApiOperation(
             value = "Deletes the goal",

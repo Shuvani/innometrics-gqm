@@ -29,6 +29,7 @@ public class Question {
     )
     private Long id;
 
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     @ManyToOne

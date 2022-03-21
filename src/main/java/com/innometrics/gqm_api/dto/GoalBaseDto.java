@@ -21,7 +21,6 @@ public class GoalBaseDto {
     private String content;
 
     @NotEmpty(message = "Email is required")
-    @Email(message = "email should be a valid email")
     @ApiModelProperty(notes = "Email of the person who created this goal")
     private String userEmail;
 

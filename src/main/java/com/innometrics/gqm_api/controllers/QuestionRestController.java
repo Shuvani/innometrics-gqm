@@ -16,6 +16,7 @@ public class QuestionRestController {
 
     private final QuestionService questionService;
 
+    @CrossOrigin
     @GetMapping("/{id}")
     @ApiOperation(
             value = "Finds question by id",
@@ -25,6 +26,7 @@ public class QuestionRestController {
         return questionService.getDtoById(questionId);
     }
 
+    @CrossOrigin
     @GetMapping
     @ApiOperation(
             value = "Returns all questions",
@@ -36,15 +38,17 @@ public class QuestionRestController {
 
     //get metrics
 
+    @CrossOrigin
     @PostMapping
     @ApiOperation(
             value = "Create new question",
             notes = "API endpoint to create a new question"
     )
-    public QuestionCreateUpdateRequest createQuestion(@Valid @RequestBody QuestionCreateUpdateRequest question){
+    public QuestionWithIdDto createQuestion(@Valid @RequestBody QuestionCreateUpdateRequest question){
         return questionService.createDtoFrom(question);
     }
 
+    @CrossOrigin
     @PutMapping("/{id}")
     @ApiOperation(
             value = "Updates the question",
@@ -57,6 +61,7 @@ public class QuestionRestController {
         return questionService.updateBy(questionId, questionCreateUpdateRequest);
     }
 
+    @CrossOrigin
     @PutMapping("/{id}/generate-metrics")
     @ApiOperation(
             value = "Automatically generate metrics to the question",
@@ -69,6 +74,7 @@ public class QuestionRestController {
 //    put:
 //    """API endpoint to apply precooked metrics to the question"""
 
+    @CrossOrigin
     @PutMapping("/{id}/assign-metrics")
     @ApiOperation(
             value = "Assigns metrics, chosen by the user, to the question",
@@ -81,6 +87,7 @@ public class QuestionRestController {
         return questionService.updateMetricsBy(questionId, questionUpdateMetricsRequest);
     }
 
+    @CrossOrigin
     @DeleteMapping("/{id}")
     @ApiOperation(
             value = "Deletes the question",
